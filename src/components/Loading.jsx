@@ -1,11 +1,11 @@
-import styles from '../stylesheets/loading.module.css';
+import styles from "../stylesheets/loading.module.css";
 
 function Loading() {
   return (
     <div className={styles.loadingContainer}>
-        <div className={styles.loader}>
-            <div></div>
-        </div>
+      <div className={styles.loader}>
+        <div></div>
+      </div>
     </div>
   );
 };

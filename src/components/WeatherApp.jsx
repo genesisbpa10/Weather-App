@@ -1,66 +1,45 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import WeatherForm from "./WeatherForm";
-import WeatherMainInfo from './WeatherMainInfo';
-import styles from '../stylesheets/weatherApp.module.css';
-import Loading from './Loading';
+import WeatherMainInfo from "./WeatherMainInfo";
+import styles from "../stylesheets/weatherApp.module.css";
+import Loading from "./Loading";
 function WeatherApp() {
-    const [weather, setWeather] = useState(null);
-    
-    useEffect(() =>{
-        loadInfo();
-    }
-    , []);
+  const [weather, setWeather] = useState(null);
 
+  useEffect(() => {
+    loadInfo();
+  }, []);
 
-    useEffect(() => {
-        document.title= `Weather | ${weather?.location.name}`;
-    } 
-    ,[weather]);
-    
-    async function loadInfo(city = 'london') {
-        try{
-          const request = await fetch(
-              `${import.meta.env.VITE_APP_URL}&key=${import.meta.env.VITE_APP_KEY}&q=${city}`
-          );
+  useEffect(() => {
+    document.title = `Weather | ${weather?.location.name}`;
+  }, [weather]);
 
-          const json = await request.json();
-          setTimeout(() => {
-              setWeather(json)
-          }, 2000);
-        
-          console.log(json);
+  async function loadInfo(city = "london") {
+    try {
+      const request = await fetch(
+        `${import.meta.env.VITE_APP_URL}&key=${
+          import.meta.env.VITE_APP_KEY
+        }&q=${city}`
+      );
 
-        } catch(error) {}
-    };
+      const json = await request.json();
+      setTimeout(() => {
+        setWeather(json);
+      }, 2000);
 
-    function handleChangeCity(city){
-        setWeather(null);
-        loadInfo(city);
-    };
-    return(
-        <div className={styles.weatherContainer}>
-            <WeatherForm  onChangeCity={handleChangeCity}/>
-            {
-            weather ? <WeatherMainInfo weather={weather}/> : <Loading /> 
-            }
-      </div>
-    );
-};
+      //   console.log(json);
+    } catch (error) {}
+  }
+
+  function handleChangeCity(city) {
+    setWeather(null);
+    loadInfo(city);
+  }
+  return (
+    <div className={styles.weatherContainer}>
+      <WeatherForm onChangeCity={handleChangeCity} />
+      {weather ? <WeatherMainInfo weather={weather} /> : <Loading />}
+    </div>
+  );
+}
 export default WeatherApp;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
