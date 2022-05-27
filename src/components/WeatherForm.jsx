@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import styles from '../stylesheets/weatherForm.module.css';
 
 function WeatherForm({onChangeCity}) {
