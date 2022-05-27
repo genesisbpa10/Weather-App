@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import WeatherForm from "./WeatherForm";
 import WeatherMainInfo from './WeatherMainInfo';
+import styles from '../stylesheets/weatherApp.module.css';
 
 function WeatherApp() {
     const [weather, setWeather] = useState(null);
     
-
     useEffect(() =>{
         loadInfo();
     }
@@ -24,22 +24,42 @@ function WeatherApp() {
           );
 
           const json = await request.json();
-
-          setWeather(json);
+          setTimeout(() => {
+              
+              setWeather(json);
+          }, 4000);
         
           console.log(json);
 
         } catch(error) {}
-    }
+    };
+
     function handleChangeCity(city){
         setWeather(null);
         loadInfo(city);
-    }
+    };
     return(
-        <div>
-        <WeatherForm  onChangeCity={handleChangeCity}/>
-        <WeatherMainInfo weather={weather}/>
+        <div className={styles.weatherContainer}>
+            <WeatherForm  onChangeCity={handleChangeCity}/>
+            <WeatherMainInfo weather={weather}/>
       </div>
     );
 };
 export default WeatherApp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
